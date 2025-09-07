@@ -208,8 +208,8 @@ export default function ParisPhotoPage() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="border border-white/20 p-6">
-              <h3 className="font-bold uppercase tracking-wider mb-4">Curatorial Team</h3>
-              <p className="text-sm text-white/60 mb-2">Lead Curator: Eden Art Collective</p>
+              <h3 className="font-bold uppercase tracking-wider mb-4">Exhibition Team</h3>
+              <p className="text-sm text-white/60 mb-2">Curator: Eden Art Collective</p>
               <p className="text-sm text-white/60 mb-2">Technical Director: Genesis Lab</p>
               <p className="text-sm text-white/60">Gallery Partner: Pending Announcement</p>
             </div>
@@ -241,10 +241,10 @@ export default function ParisPhotoPage() {
           </p>
           <div className="flex items-center justify-center gap-6">
             <a 
-              href="mailto:press@solienne.ai" 
+              href="mailto:ameesia@automata.art" 
               className="px-6 py-3 border border-white/30 hover:border-white transition-colors"
             >
-              <span className="uppercase tracking-wider">Press Inquiries</span>
+              <span className="uppercase tracking-wider">Press Contact: Ameesia</span>
             </a>
             <a 
               href="mailto:curator@solienne.ai" 
