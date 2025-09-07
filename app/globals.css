@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --consciousness-gradient: linear-gradient(180deg, #000000 0%, #111111 100%);
+  }
+
+  html {
+    @apply bg-black text-white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply min-h-screen bg-black;
+  }
+
+  ::selection {
+    @apply bg-white text-black;
+  }
+}
+
+@layer components {
+  .consciousness-border {
+    @apply border border-white/20 hover:border-white/40 transition-all duration-500;
+  }
+
+  .consciousness-glow {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  }
+
+  .text-consciousness {
+    @apply text-white/90;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .helvetica-title {
+    @apply font-helvetica font-bold uppercase tracking-wider;
+  }
+
+  .paris-countdown {
+    @apply text-6xl font-helvetica font-bold tracking-wider;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@layer utilities {
+  .animate-consciousness {
+    animation: consciousness 20s ease-in-out infinite;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
