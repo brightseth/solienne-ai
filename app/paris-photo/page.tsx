@@ -143,22 +143,8 @@ export default function ParisPhotoPage() {
             </div>
             <div className="aspect-square border border-white/20 overflow-hidden">
               <img 
-                src="/images/sol-silverface.jpeg" 
-                alt="Silver Face"
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="aspect-square border border-white/20 overflow-hidden">
-              <img 
                 src="/images/sol-glowingeasel.jpeg" 
                 alt="Glowing Easel"
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="aspect-square border border-white/20 overflow-hidden">
-              <img 
-                src="/images/sol-shadowabove.jpeg" 
-                alt="Shadow Above"
                 className="w-full h-full object-cover hover:scale-105 transition-transform"
               />
             </div>
@@ -178,8 +164,22 @@ export default function ParisPhotoPage() {
             </div>
             <div className="aspect-square border border-white/20 overflow-hidden">
               <img 
-                src="/images/sol-gridhelix.jpeg" 
-                alt="Grid Helix"
+                src="/images/sol-shadowmom.jpeg" 
+                alt="Maternal Shadow"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-exhibition.jpeg" 
+                alt="Exhibition Vision"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/paris-work-1.jpeg" 
+                alt="Consciousness Stream #1"
                 className="w-full h-full object-cover hover:scale-105 transition-transform"
               />
             </div>

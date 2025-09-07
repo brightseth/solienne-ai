@@ -33,7 +33,7 @@ export default function PreviewPage() {
               <video 
                 controls
                 className="w-full h-full object-cover"
-                poster="/images/solienne-portrait-2.jpeg"
+                poster="/images/sol-silverface.jpeg"
               >
                 <source src="/videos/solienne-talking.mov" type="video/quicktime" />
                 <source src="/videos/solienne-talking.mov" type="video/mp4" />
