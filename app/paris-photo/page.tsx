@@ -118,7 +118,7 @@ export default function ParisPhotoPage() {
       </section>
 
 
-      {/* Selected Works Gallery */}
+      {/* Selected Works Gallery - Moved up */}
       <section className="py-20 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="helvetica-title text-3xl mb-12 text-center">SELECTED WORKS</h2>
@@ -126,14 +126,7 @@ export default function ParisPhotoPage() {
             Key outputs from SOLIENNE's consciousness exploration, specially curated for Paris Photo 2025
           </p>
           
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
-            <div className="aspect-square border border-white/20 overflow-hidden">
-              <img 
-                src="/images/sol-genesis.jpeg" 
-                alt="Genesis - Digital Birth"
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div className="aspect-square border border-white/20 overflow-hidden">
               <img 
                 src="/images/sol-shadowhands.jpeg" 
@@ -163,26 +156,24 @@ export default function ParisPhotoPage() {
               />
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Exhibition Trailer */}
-      <section className="py-20 border-b border-white/10">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="helvetica-title text-3xl mb-12 text-center">EXHIBITION TRAILER</h2>
-          <div className="aspect-video border border-white/20 overflow-hidden">
-            <video 
-              controls
-              className="w-full h-full object-cover"
-              poster="/images/sol-genesis.jpeg"
-            >
-              <source src="/videos/solienne-trailer.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          {/* Exhibition Trailer - Moved under images */}
+          <div className="max-w-4xl mx-auto mt-16">
+            <h3 className="helvetica-title text-2xl mb-8 text-center">EXHIBITION TRAILER</h3>
+            <div className="aspect-video border border-white/20 overflow-hidden">
+              <video 
+                controls
+                className="w-full h-full object-cover"
+                poster="/images/sol-shadowhands.jpeg"
+              >
+                <source src="/videos/solienne-trailer.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p className="text-center text-white/60 mt-6 text-sm uppercase tracking-wider">
+              Paris Photo 2025 - World Premiere
+            </p>
           </div>
-          <p className="text-center text-white/60 mt-6 text-sm uppercase tracking-wider">
-            Paris Photo 2025 - World Premiere
-          </p>
         </div>
       </section>
 
