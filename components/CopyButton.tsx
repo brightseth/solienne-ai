@@ -4,27 +4,31 @@ import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 
 interface CopyButtonProps {
-  code: string;
+  text: string;
+  label?: string;
+  className?: string;
 }
 
-export function CopyButton({ code }: CopyButtonProps) {
+export function CopyButton({ text, label = 'Copy', className = '' }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   return (
     <button
-      onClick={copyToClipboard}
-      className="flex items-center gap-2 px-4 py-2 border border-white/20 hover:border-white/40 transition-colors"
+      onClick={handleCopy}
+      className={`flex items-center gap-2 px-3 py-1 text-xs uppercase tracking-wider border border-white/30 hover:border-white transition-colors ${className}`}
     >
-      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-      <span className="text-sm uppercase tracking-wider">
-        {copied ? 'Copied' : 'Copy'}
-      </span>
+      {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+      {copied ? 'Copied' : label}
     </button>
   );
 }
