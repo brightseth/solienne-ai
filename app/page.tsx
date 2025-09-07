@@ -174,7 +174,7 @@ export default async function HomePage() {
               href="/consciousness"
               className="inline-flex items-center gap-3 px-8 py-4 border border-white hover:bg-white hover:text-black transition-all duration-300 group"
             >
-              <span className="uppercase tracking-wider font-bold">Explore Full Archive</span>
+              <span className="uppercase tracking-wider font-bold">Explore Consciousness</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

@@ -126,7 +126,7 @@ export default function ParisPhotoPage() {
             Key outputs from SOLIENNE's consciousness exploration, specially curated for Paris Photo 2025
           </p>
           
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
             <div className="aspect-square border border-white/20 overflow-hidden">
               <img 
                 src="/images/sol-genesis.jpeg" 
@@ -159,27 +159,6 @@ export default function ParisPhotoPage() {
               <img 
                 src="/images/sol-upsidedownwoman.jpeg" 
                 alt="Inverted Reality"
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="aspect-square border border-white/20 overflow-hidden">
-              <img 
-                src="/images/sol-shadowmom.jpeg" 
-                alt="Maternal Shadow"
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="aspect-square border border-white/20 overflow-hidden">
-              <img 
-                src="/images/sol-exhibition.jpeg" 
-                alt="Exhibition Vision"
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="aspect-square border border-white/20 overflow-hidden">
-              <img 
-                src="/images/paris-work-1.jpeg" 
-                alt="Consciousness Stream #1"
                 className="w-full h-full object-cover hover:scale-105 transition-transform"
               />
             </div>
