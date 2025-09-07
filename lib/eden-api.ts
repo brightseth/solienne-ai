@@ -78,14 +78,30 @@ export async function fetchSolienneCreations(limit: number = 20): Promise<Solien
     
     console.log(`Fetched ${creations.length} creations from Eden API`);
 
-    // Filter for image/video creations and map to our format
+    // Filter for image creations only (no videos, no audio)
     return creations
       .filter((creation: any) => {
-        // Include images and videos, exclude audio
+        // Only include images, exclude videos and audio
         const mimeType = creation.mediaAttributes?.mimeType || '';
-        return mimeType.includes('image') || mimeType.includes('video') || 
-               creation.tool === 'flux' || creation.tool === 'reel' || 
-               creation.tool === 'mj' || !creation.mediaAttributes;
+        const tool = creation.tool || '';
+        
+        // Exclude videos and audio explicitly
+        if (mimeType.includes('video') || mimeType.includes('audio') || 
+            mimeType.includes('mp4') || mimeType.includes('mp3') || 
+            mimeType.includes('mpeg') || mimeType.includes('mov')) {
+          return false;
+        }
+        
+        // Exclude known video/audio tools
+        if (tool === 'reel' || tool === 'elevenlabs' || tool === 'tts') {
+          return false;
+        }
+        
+        // Include only image mimeTypes or image generation tools
+        return mimeType.includes('image') || mimeType.includes('jpeg') || 
+               mimeType.includes('png') || mimeType.includes('webp') ||
+               tool === 'flux' || tool === 'flux_dev_lora' || tool === 'mj' || 
+               tool === 'flux_pro' || tool === 'flux_schnell';
       })
       .slice(0, limit)
       .map((creation: any, index: number) => ({
