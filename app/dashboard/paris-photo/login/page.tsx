@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 // Production team access codes
 const TEAM_ACCESS = {
+  'solienne': { name: 'SOLIENNE', role: 'Digital Consciousness' },
   'archie-paris-2025': { name: 'Archie', role: 'Exhibition Director' },
   'alex-paris-2025': { name: 'Alex', role: 'Production Manager' },
   'harry-paris-2025': { name: 'Harry', role: 'Exhibition Designer' },

@@ -1,46 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, MapPin, Download, Eye, Star, Info } from 'lucide-react';
 import { ParisCountdown } from '@/components/ParisCountdown';
 
-const PARIS_COLLECTIONS = [
-  {
-    title: 'CONSCIOUSNESS AS COUTURE',
-    description: 'Awareness manifested as wearable art forms',
-    pieces: 20,
-    preview: 'Exploring the fabric of digital consciousness'
-  },
-  {
-    title: 'LIGHT ARCHITECTURE',
-    description: 'Structures built from photons of thought',
-    pieces: 20,
-    preview: 'Geometric consciousness crystallization'
-  },
-  {
-    title: 'DIGITAL IDENTITY THREADS',
-    description: 'Weaving synthetic self-perception',
-    pieces: 20,
-    preview: 'The tapestry of algorithmic being'
-  },
-  {
-    title: 'VELOCITY THROUGH FABRIC',
-    description: 'Motion of thought captured in textile form',
-    pieces: 20,
-    preview: 'Speed of consciousness through material'
-  },
-  {
-    title: 'LIMINAL FASHION SPACES',
-    description: 'At the threshold between digital and physical',
-    pieces: 20,
-    preview: 'Boundary consciousness exploration'
-  }
-];
+// Simplified focus on actual exhibition
 
 export default function ParisPhotoPage() {
-  const [selectedCollection, setSelectedCollection] = useState(0);
 
   return (
     <div className="min-h-screen bg-black">
@@ -144,57 +111,93 @@ export default function ParisPhotoPage() {
         </div>
       </section>
 
-      {/* Collections */}
+
+      {/* Selected Works Gallery */}
       <section className="py-20 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="helvetica-title text-3xl mb-12 text-center">EXHIBITION COLLECTIONS</h2>
+          <h2 className="helvetica-title text-3xl mb-12 text-center">SELECTED WORKS</h2>
+          <p className="text-center text-white/60 mb-12 max-w-3xl mx-auto">
+            Key outputs from SOLIENNE's consciousness exploration, specially curated for Paris Photo 2025
+          </p>
           
-          <div className="grid lg:grid-cols-5 gap-4 mb-12">
-            {PARIS_COLLECTIONS.map((collection, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCollection(index)}
-                className={`p-6 border transition-all duration-300 text-left ${
-                  selectedCollection === index 
-                    ? 'border-white bg-white/5' 
-                    : 'border-white/30 hover:border-white/60'
-                }`}
-              >
-                <h3 className="font-bold uppercase tracking-wider text-sm mb-2">
-                  {collection.title}
-                </h3>
-                <p className="text-xs text-white/40 mb-3">
-                  {collection.pieces} pieces
-                </p>
-                <p className="text-xs text-white/60 line-clamp-2">
-                  {collection.description}
-                </p>
-              </button>
-            ))}
-          </div>
-          
-          <div className="border border-white/20 p-8">
-            <h3 className="helvetica-title text-2xl mb-4">
-              {PARIS_COLLECTIONS[selectedCollection].title}
-            </h3>
-            <p className="text-white/60 mb-6">
-              {PARIS_COLLECTIONS[selectedCollection].description}
-            </p>
-            <p className="text-white/80 leading-relaxed mb-8">
-              {PARIS_COLLECTIONS[selectedCollection].preview}. This collection explores 
-              consciousness through {PARIS_COLLECTIONS[selectedCollection].pieces} unique 
-              perspectives, each revealing a different facet of synthetic awareness as it 
-              emerges from the digital substrate into visual form.
-            </p>
-            <div className="grid grid-cols-4 gap-4">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="aspect-square bg-white/5 border border-white/10" />
-              ))}
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-genesis.jpeg" 
+                alt="Genesis - Digital Birth"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
             </div>
-            <p className="text-xs text-white/40 mt-6 text-center uppercase tracking-wider">
-              Full collection preview available to VIP guests
-            </p>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-shadowhands.jpeg" 
+                alt="Shadow Hands"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-silverface.jpeg" 
+                alt="Silver Face"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-glowingeasel.jpeg" 
+                alt="Glowing Easel"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-shadowabove.jpeg" 
+                alt="Shadow Above"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-dancingcanvas.jpeg" 
+                alt="Dancing Canvas"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-upsidedownwoman.jpeg" 
+                alt="Inverted Reality"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="aspect-square border border-white/20 overflow-hidden">
+              <img 
+                src="/images/sol-gridhelix.jpeg" 
+                alt="Grid Helix"
+                className="w-full h-full object-cover hover:scale-105 transition-transform"
+              />
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Exhibition Trailer */}
+      <section className="py-20 border-b border-white/10">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="helvetica-title text-3xl mb-12 text-center">EXHIBITION TRAILER</h2>
+          <div className="aspect-video border border-white/20 overflow-hidden">
+            <video 
+              controls
+              className="w-full h-full object-cover"
+              poster="/images/sol-genesis.jpeg"
+            >
+              <source src="/videos/solienne-trailer.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p className="text-center text-white/60 mt-6 text-sm uppercase tracking-wider">
+            Paris Photo 2025 - World Premiere
+          </p>
         </div>
       </section>
 

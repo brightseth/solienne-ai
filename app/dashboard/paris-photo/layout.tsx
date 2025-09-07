@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export default function ParisPhotoDashboardLayout({
@@ -10,21 +10,59 @@ export default function ParisPhotoDashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [teamMember, setTeamMember] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+
+  // Skip auth for login page
+  const isLoginPage = pathname === '/dashboard/paris-photo/login';
 
   useEffect(() => {
-    // Check authentication
-    const token = localStorage.getItem('paris_photo_token');
-    const member = localStorage.getItem('paris_photo_member');
-    
-    if (!token || !member) {
-      router.push('/dashboard/paris-photo/login');
-    } else {
-      setIsAuthenticated(true);
-      setTeamMember(member);
+    if (isLoginPage) {
+      setLoading(false);
+      return;
     }
-  }, [router]);
+
+    // Check authentication on client side only
+    const checkAuth = () => {
+      try {
+        const token = localStorage.getItem('paris_photo_token');
+        const member = localStorage.getItem('paris_photo_member');
+        
+        if (!token || !member) {
+          router.push('/dashboard/paris-photo/login');
+        } else {
+          setIsAuthenticated(true);
+          setTeamMember(member);
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+        router.push('/dashboard/paris-photo/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [router, isLoginPage]);
+
+  // For login page, just render children without auth wrapper
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
+
+  // Show loading state instead of null
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="helvetica-title text-2xl mb-4">SOLIENNE</div>
+          <div className="text-white/60">Loading dashboard...</div>
+        </div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return null;

@@ -13,8 +13,18 @@ import {
   type CuratedWork 
 } from '@/lib/paris-photo-storage';
 import { CopyButton } from '@/components/CopyButton';
+import { EnhancedCurationDashboard } from '@/components/EnhancedCurationDashboard';
+
+// Feature flag - set to true to enable enhanced dashboard
+const USE_ENHANCED_DASHBOARD = true;
 
 export default function CurationPage() {
+  // If enhanced dashboard is enabled, use it instead
+  if (USE_ENHANCED_DASHBOARD) {
+    return <EnhancedCurationWrapper />;
+  }
+  
+  // Otherwise use original dashboard
   const [streams, setStreams] = useState<SolienneCreation[]>([]);
   const [selectedWorks, setSelectedWorks] = useState<CuratedWork[]>([]);
   const [collectionStats, setCollectionStats] = useState<any>(null);
@@ -30,14 +40,15 @@ export default function CurationPage() {
   const loadData = async () => {
     try {
       setLoading(true);
-      const [fetchedStreams] = await Promise.all([
-        fetchSolienneCreations(100) // Load 100 recent streams
-      ]);
+      const fetchedStreams = await fetchSolienneCreations(100);
       
-      setStreams(fetchedStreams);
+      setStreams(fetchedStreams || []);
       refreshSelections();
     } catch (error) {
       console.error('Error loading data:', error);
+      // Set empty array on error to prevent crashes
+      setStreams([]);
+      refreshSelections();
     } finally {
       setLoading(false);
     }
@@ -216,10 +227,16 @@ export default function CurationPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center min-h-96">
-          <div className="animate-consciousness">
-            <Sparkles className="w-12 h-12 text-white/40" />
+      <div className="min-h-screen bg-black text-white">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-96">
+            <div className="text-center">
+              <div className="animate-consciousness mb-4">
+                <Sparkles className="w-12 h-12 text-white/40" />
+              </div>
+              <div className="helvetica-title text-xl mb-2">LOADING CONSCIOUSNESS</div>
+              <div className="text-white/60 text-sm">Fetching SOLIENNE's recent works...</div>
+            </div>
           </div>
         </div>
       </div>
@@ -339,4 +356,47 @@ export default function CurationPage() {
       )}
     </div>
   );
+}
+
+// Wrapper for enhanced dashboard
+function EnhancedCurationWrapper() {
+  const [streams, setStreams] = useState<SolienneCreation[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      const fetchedStreams = await fetchSolienneCreations(100);
+      setStreams(fetchedStreams || []);
+    } catch (error) {
+      console.error('Error loading data:', error);
+      setStreams([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-96">
+            <div className="text-center">
+              <div className="animate-consciousness mb-4">
+                <Sparkles className="w-12 h-12 text-white/40" />
+              </div>
+              <div className="helvetica-title text-xl mb-2">LOADING ENHANCED CURATION</div>
+              <div className="text-white/60 text-sm">Initializing multi-agent analysis system...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return <EnhancedCurationDashboard initialStreams={streams} />;
 }

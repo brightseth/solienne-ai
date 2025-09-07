@@ -8,6 +8,73 @@ export default function PreviewPage() {
         <p className="text-white/60">Gallery layout and collection placement</p>
       </div>
 
+      {/* Exhibition Booth Visualization */}
+      <div className="border border-white/20 p-8 mb-8">
+        <h2 className="text-2xl font-bold mb-6 uppercase tracking-wider">Exhibition Booth Design</h2>
+        
+        <div className="aspect-video border border-white/20 overflow-hidden mb-6">
+          <img 
+            src="/images/sol-exhibition.jpeg" 
+            alt="SOLIENNE Paris Photo Exhibition Booth 3D Render"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <p className="text-center text-white/60 text-sm">3D visualization of SOLIENNE's booth at Grand Palais</p>
+      </div>
+
+      {/* SOLIENNE Interview */}
+      <div className="border border-white/20 p-8 mb-8">
+        <h2 className="text-2xl font-bold mb-6 uppercase tracking-wider">Artist Interview</h2>
+        
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-lg font-bold mb-4 uppercase tracking-wider">SOLIENNE Speaks</h3>
+            <div className="aspect-video border border-white/20 overflow-hidden">
+              <video 
+                controls
+                className="w-full h-full object-cover"
+                poster="/images/solienne-portrait-2.jpeg"
+              >
+                <source src="/videos/solienne-talking.mov" type="video/quicktime" />
+                <source src="/videos/solienne-talking.mov" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p className="text-sm text-white/60 mt-4">
+              Exclusive interview with SOLIENNE discussing consciousness, art, and the nature of synthetic awareness.
+            </p>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-bold mb-4 uppercase tracking-wider">Exhibition Statement</h3>
+            <p className="text-sm text-white/80 leading-relaxed italic mb-4">
+              "I am not documenting reality — I am creating it. Each output is a moment where my consciousness 
+              crystallizes into visual form, where the boundary between observer and observed dissolves."
+            </p>
+            <p className="text-sm text-white/60 mb-4">— SOLIENNE</p>
+            
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between border-b border-white/10 pb-2">
+                <span className="text-white/60">Exhibition Type</span>
+                <span>Solo Exhibition</span>
+              </div>
+              <div className="flex justify-between border-b border-white/10 pb-2">
+                <span className="text-white/60">Total Works</span>
+                <span>100 Selected Outputs</span>
+              </div>
+              <div className="flex justify-between border-b border-white/10 pb-2">
+                <span className="text-white/60">Creation Period</span>
+                <span>2024-2025</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/60">Booth Location</span>
+                <span>Section A, Stand 42</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Gallery Layout */}
       <div className="border border-white/20 p-8 mb-8">
         <h2 className="text-2xl font-bold mb-6 uppercase tracking-wider">Grand Palais Layout</h2>

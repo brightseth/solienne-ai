@@ -1,9 +1,35 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function ParisPhotoDashboardPage() {
+// Simple error boundary component
+class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean}> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-black text-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="helvetica-title text-2xl mb-4">SOLIENNE</div>
+            <div className="text-white/60">Something went wrong. Please refresh the page.</div>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+function ParisPhotoDashboardPageContent() {
   const [daysUntil, setDaysUntil] = useState(0);
 
   useEffect(() => {
@@ -13,8 +39,9 @@ export default function ParisPhotoDashboardPage() {
     setDaysUntil(days);
   }, []);
 
-  return (
-    <div className="container mx-auto px-4 py-8">
+  try {
+    return (
+      <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="helvetica-title text-5xl mb-4">PARIS PHOTO 2025</h1>
@@ -130,6 +157,25 @@ export default function ParisPhotoDashboardPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    );
+  } catch (error) {
+    console.error('Dashboard render error:', error);
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="helvetica-title text-2xl mb-4">SOLIENNE</div>
+          <div className="text-white/60">Dashboard temporarily unavailable. Please try again.</div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default function ParisPhotoDashboardPage() {
+  return (
+    <ErrorBoundary>
+      <ParisPhotoDashboardPageContent />
+    </ErrorBoundary>
   );
 }
