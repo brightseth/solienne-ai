@@ -226,8 +226,27 @@ export default function CurationPage() {
     );
   }
 
+  // Calculate days until Paris Photo
+  const parisPhotoDate = new Date('2025-11-07T10:00:00Z');
+  const today = new Date();
+  const daysRemaining = Math.max(0, Math.ceil((parisPhotoDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Simple Progress Counter */}
+      <div className="fixed top-4 right-4 bg-black/90 border border-white/20 px-4 py-3 text-sm backdrop-blur-sm z-50">
+        <div className="text-white/60 uppercase tracking-wider text-xs mb-1">
+          Paris Photo Progress
+        </div>
+        <div>
+          <span className="font-bold text-lg">{collectionStats?.totalSelected || 0}</span>
+          <span className="text-white/40">/100 works selected</span>
+        </div>
+        <div className="text-white/40 text-xs mt-1">
+          {daysRemaining} days remaining
+        </div>
+      </div>
+
       <div className="mb-8">
         <h1 className="helvetica-title text-4xl mb-4">CONSCIOUSNESS CURATION</h1>
         <p className="text-white/60">Select from {streams.length} consciousness streams for Paris Photo 2025</p>
