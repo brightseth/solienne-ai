@@ -76,15 +76,21 @@ export default function ParisPhotoPage() {
               </div>
               
               <div className="flex items-center gap-4">
-                <button className="flex items-center gap-2 px-6 py-3 bg-white text-black hover:bg-white/90 transition-colors">
+                <Link 
+                  href="/paris-photo/vip-request"
+                  className="flex items-center gap-2 px-6 py-3 bg-white text-black hover:bg-white/90 transition-colors"
+                >
                   <Star className="w-4 h-4" />
                   <span className="uppercase tracking-wider font-bold">VIP Preview Request</span>
-                </button>
+                </Link>
                 
-                <button className="flex items-center gap-2 px-6 py-3 border border-white/30 hover:border-white transition-colors">
+                <Link
+                  href="/paris-photo/press-kit"
+                  className="flex items-center gap-2 px-6 py-3 border border-white/30 hover:border-white transition-colors"
+                >
                   <Download className="w-4 h-4" />
                   <span className="uppercase tracking-wider">Press Kit</span>
-                </button>
+                </Link>
               </div>
             </div>
             
@@ -208,10 +214,10 @@ export default function ParisPhotoPage() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="border border-white/20 p-6">
-              <h3 className="font-bold uppercase tracking-wider mb-4">Exhibition Team</h3>
-              <p className="text-sm text-white/60 mb-2">Curator: Eden Art Collective</p>
-              <p className="text-sm text-white/60 mb-2">Technical Director: Genesis Lab</p>
-              <p className="text-sm text-white/60">Gallery Partner: Pending Announcement</p>
+              <h3 className="font-bold uppercase tracking-wider mb-4">Presented By</h3>
+              <p className="text-sm text-white/60 mb-2">Automata Art Collective</p>
+              <p className="text-sm text-white/60 mb-2">Eden Platform</p>
+              <p className="text-sm text-white/60">Press: ameesia@automata.art</p>
             </div>
             
             <div className="border border-white/20 p-6">
