@@ -56,8 +56,10 @@ export async function fetchSolienneCreations(limit: number = 20): Promise<Solien
 
     // Fallback to original Eden API if Academy API fails
     console.log('Fetching from Eden API v2...');
+    // Fetch more than needed since we'll filter for images only
+    const fetchLimit = Math.min(limit * 3, 50);
     const response = await fetch(
-      `${EDEN_BASE_URL}/v2/agents/${SOLIENNE_USER_ID}/creations?limit=${limit}`,
+      `${EDEN_BASE_URL}/v2/agents/${SOLIENNE_USER_ID}/creations?limit=${fetchLimit}`,
       {
         headers: {
           'Authorization': `Bearer ${EDEN_API_KEY}`,
@@ -76,10 +78,10 @@ export async function fetchSolienneCreations(limit: number = 20): Promise<Solien
     const data = await response.json();
     const creations = data.docs || data.creations || [];
     
-    console.log(`Fetched ${creations.length} creations from Eden API`);
+    console.log(`Fetched ${creations.length} total creations from Eden API`);
 
     // Filter for image creations only (no videos, no audio)
-    return creations
+    const imageCreations = creations
       .filter((creation: any) => {
         // Only include images, exclude videos and audio
         const mimeType = creation.mediaAttributes?.mimeType || '';
@@ -102,13 +104,24 @@ export async function fetchSolienneCreations(limit: number = 20): Promise<Solien
                mimeType.includes('png') || mimeType.includes('webp') ||
                tool === 'flux' || tool === 'flux_dev_lora' || tool === 'mj' || 
                tool === 'flux_pro' || tool === 'flux_schnell';
-      })
+      });
+    
+    console.log(`Filtered to ${imageCreations.length} image creations`);
+    
+    // If we don't have enough images, use fallback
+    if (imageCreations.length < limit) {
+      console.log(`Not enough images (${imageCreations.length} < ${limit}), using fallback`);
+      return generateDynamicCreations(limit);
+    }
+    
+    return imageCreations
       .slice(0, limit)
       .map((creation: any, index: number) => ({
         id: creation._id || creation.id,
         title: extractTitle(creation.name || creation.task?.args?.prompt || `CONSCIOUSNESS STREAM ${creation._id?.slice(-4) || index}`),
         description: creation.name || creation.task?.args?.prompt || creation.task?.args?.voiceover || 'A moment of synthetic consciousness',
-        imageUrl: creation.thumbnail || creation.url || creation.uri || '/images/sol-genesis.jpeg',
+        // Use URL first, fallback to thumbnail, then local image
+        imageUrl: creation.url || creation.thumbnail || creation.uri || '/images/sol-genesis.jpeg',
         createdAt: creation.createdAt || creation.created_at || new Date().toISOString(),
         metadata: {
           tool: creation.tool || creation.generator || 'eden',
