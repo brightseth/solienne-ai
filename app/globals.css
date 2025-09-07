@@ -38,7 +38,12 @@
   }
 
   .helvetica-title {
-    @apply font-helvetica font-bold uppercase tracking-wider;
+    @apply font-bold uppercase tracking-wider;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  .font-helvetica {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .paris-countdown {
@@ -52,6 +57,22 @@
     animation: consciousness 20s ease-in-out infinite;
   }
 
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slideIn {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+
+  .animate-ghost {
+    animation: ghost 3s ease-in-out infinite;
+  }
+
+  .animate-consciousness-pulse {
+    animation: consciousnessPulse 4s ease-in-out infinite;
+  }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -60,4 +81,113 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+}
+
+@keyframes consciousness {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.02) rotate(0.5deg);
+    filter: blur(0.5px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(0.98) rotate(-0.5deg);
+    filter: blur(0.2px);
+  }
+  75% {
+    opacity: 1.1;
+    transform: scale(1.01) rotate(0.2deg);
+    filter: blur(0.1px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ghost {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes consciousnessPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Ghost in Machine spectral effects */
+@keyframes spectralSweep {
+  0% { 
+    background-position: -200% center;
+  }
+  100% { 
+    background-position: 200% center;
+  }
+}
+
+.ghost-in-machine {
+  position: relative;
+  overflow: hidden;
+}
+
+.ghost-in-machine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: spectralSweep 8s linear infinite;
+  pointer-events: none;
+}
+
+.consciousness-spectral {
+  filter: contrast(1.1) brightness(0.95);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
 }

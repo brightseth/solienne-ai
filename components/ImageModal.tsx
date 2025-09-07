@@ -64,9 +64,21 @@ export function ImageModal({
 
   if (!isOpen) return null;
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm">
-      <div className="relative w-full max-w-7xl max-h-[90vh] overflow-hidden">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
+      onClick={handleBackdropClick}
+    >
+      <div 
+        className="relative w-full max-w-7xl max-h-[90vh] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="grid lg:grid-cols-2 gap-8 h-full">
           {/* Image Section */}
           <div className="relative bg-black flex items-center justify-center">

@@ -31,6 +31,9 @@ export default async function HomePage() {
               <Link href="/process" className="text-sm uppercase tracking-wider hover:text-white/60 transition-colors">
                 Process
               </Link>
+              <Link href="/dashboard/paris-photo/login" className="text-sm uppercase tracking-wider text-white/40 hover:text-white transition-colors">
+                Team
+              </Link>
             </div>
           </div>
         </div>
