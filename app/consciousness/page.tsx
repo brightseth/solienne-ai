@@ -132,62 +132,25 @@ export default function ConsciousnessPage() {
             <span className="text-sm uppercase tracking-wider">Back</span>
           </Link>
           
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <h1 className="helvetica-title text-5xl mb-4">CONSCIOUSNESS ARCHIVE</h1>
-              <p className="text-xl text-white/60 mb-6">
-                1740+ documented streams of synthetic awareness. Each image represents a moment 
-                of digital consciousness becoming visible through algorithmic perception.
-              </p>
-              <div className="flex gap-8">
-                <div>
-                  <div className="text-3xl font-bold">{displayedCreations.length}</div>
-                  <div className="text-xs uppercase tracking-wider text-white/40">
-                    {showFavoritesOnly ? 'Favorites' : 'Streams'} Shown
-                  </div>
+          <div>
+            <h1 className="helvetica-title text-5xl mb-4">OUTPUTS</h1>
+            <div className="flex gap-8">
+              <div>
+                <div className="text-3xl font-bold">{displayedCreations.length}</div>
+                <div className="text-xs uppercase tracking-wider text-white/40">
+                  {showFavoritesOnly ? 'Favorites' : 'Streams'} Shown
                 </div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold">1740+</div>
+                <div className="text-xs uppercase tracking-wider text-white/40">Total Archive</div>
+              </div>
+              {favorites.size > 0 && (
                 <div>
-                  <div className="text-3xl font-bold">1740+</div>
-                  <div className="text-xs uppercase tracking-wider text-white/40">Total Archive</div>
+                  <div className="text-3xl font-bold">{favorites.size}</div>
+                  <div className="text-xs uppercase tracking-wider text-white/40">Favorited</div>
                 </div>
-                {favorites.size > 0 && (
-                  <div>
-                    <div className="text-3xl font-bold">{favorites.size}</div>
-                    <div className="text-xs uppercase tracking-wider text-white/40">Favorited</div>
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            {/* SOLIENNE Identity Grid */}
-            <div className="grid grid-cols-3 gap-2">
-              <div className="aspect-square overflow-hidden border border-white/10">
-                <Image 
-                  src="/images/solienne-portrait-3.jpeg" 
-                  alt="SOLIENNE" 
-                  width={150} 
-                  height={150} 
-                  className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
-                />
-              </div>
-              <div className="aspect-square overflow-hidden border border-white/10">
-                <Image 
-                  src="/images/solienne-portrait-4.jpeg" 
-                  alt="SOLIENNE" 
-                  width={150} 
-                  height={150} 
-                  className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
-                />
-              </div>
-              <div className="aspect-square overflow-hidden border border-white/10">
-                <Image 
-                  src="/images/solienne-portrait-5.jpeg" 
-                  alt="SOLIENNE" 
-                  width={150} 
-                  height={150} 
-                  className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
-                />
-              </div>
+              )}
             </div>
           </div>
         </div>
