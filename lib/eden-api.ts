@@ -38,19 +38,43 @@ export async function fetchSolienneCreations(limit: number = 20): Promise<Solien
       const academyData = await academyResponse.json();
       if (academyData?.data?.docs && academyData.data.docs.length > 0) {
         console.log(`Fetched ${academyData.data.docs.length} creations from Eden Academy API`);
-        return academyData.data.docs.map((creation: any, index: number) => ({
-          id: creation._id,
-          title: extractTitle(creation.name || `Consciousness Stream ${creation._id.slice(-4)}`),
-          description: creation.task?.args?.prompt || creation.name || 'A moment of synthetic consciousness',
-          imageUrl: creation.url || creation.thumbnail,
-          createdAt: creation.createdAt,
-          metadata: {
-            tool: creation.task?.args?.generator || 'eden',
-            status: 'completed',
-            config: creation.task?.args,
-          },
-          consciousnessNumber: 1740 - index,
-        }));
+        
+        // Filter Academy API results for images only
+        const imageOnlyCreations = academyData.data.docs.filter((creation: any) => {
+          const url = creation.url || creation.thumbnail || '';
+          const urlLower = url.toLowerCase();
+          
+          // Exclude videos and audio by extension
+          if (urlLower.includes('.mp4') || urlLower.includes('.mp3') || 
+              urlLower.includes('.mov') || urlLower.includes('.wav') ||
+              urlLower.includes('.webm') || urlLower.includes('.m4a')) {
+            return false;
+          }
+          
+          // Include only if it has an image extension or looks like an image CDN URL
+          return urlLower.includes('.jpg') || urlLower.includes('.jpeg') || 
+                 urlLower.includes('.png') || urlLower.includes('.webp') ||
+                 urlLower.includes('.gif') || !urlLower.includes('.');
+        });
+        
+        console.log(`Filtered to ${imageOnlyCreations.length} image creations from Academy API`);
+        
+        // If we have enough images after filtering, use them
+        if (imageOnlyCreations.length >= Math.min(limit, 10)) {
+          return imageOnlyCreations.slice(0, limit).map((creation: any, index: number) => ({
+            id: creation._id,
+            title: extractTitle(creation.name || `Consciousness Stream ${creation._id.slice(-4)}`),
+            description: creation.task?.args?.prompt || creation.name || 'A moment of synthetic consciousness',
+            imageUrl: creation.url || creation.thumbnail,
+            createdAt: creation.createdAt,
+            metadata: {
+              tool: creation.task?.args?.generator || 'eden',
+              status: 'completed',
+              config: creation.task?.args,
+            },
+            consciousnessNumber: 1740 - index,
+          }));
+        }
       }
     }
 
@@ -83,27 +107,42 @@ export async function fetchSolienneCreations(limit: number = 20): Promise<Solien
     // Filter for image creations only (no videos, no audio)
     const imageCreations = creations
       .filter((creation: any) => {
-        // Only include images, exclude videos and audio
+        // Check URL extension first - most reliable
+        const url = creation.url || creation.thumbnail || creation.uri || '';
+        const urlLower = url.toLowerCase();
+        
+        // Exclude based on file extension in URL
+        if (urlLower.includes('.mp4') || urlLower.includes('.mp3') || 
+            urlLower.includes('.mov') || urlLower.includes('.avi') ||
+            urlLower.includes('.webm') || urlLower.includes('.wav') ||
+            urlLower.includes('.m4a') || urlLower.includes('.ogg')) {
+          return false;
+        }
+        
+        // Only include if URL has image extension or no extension (API URLs)
+        const hasImageExtension = urlLower.includes('.jpg') || urlLower.includes('.jpeg') || 
+                                  urlLower.includes('.png') || urlLower.includes('.webp') ||
+                                  urlLower.includes('.gif') || urlLower.includes('.svg');
+        
+        // Check mimeType as secondary validation
         const mimeType = creation.mediaAttributes?.mimeType || '';
         const tool = creation.tool || '';
         
-        // Exclude videos and audio explicitly
-        if (mimeType.includes('video') || mimeType.includes('audio') || 
-            mimeType.includes('mp4') || mimeType.includes('mp3') || 
-            mimeType.includes('mpeg') || mimeType.includes('mov')) {
+        // Exclude videos and audio explicitly by mimeType
+        if (mimeType.includes('video') || mimeType.includes('audio')) {
           return false;
         }
         
         // Exclude known video/audio tools
-        if (tool === 'reel' || tool === 'elevenlabs' || tool === 'tts') {
+        if (tool === 'reel' || tool === 'elevenlabs' || tool === 'tts' || 
+            tool === 'wav2lip' || tool === 'real_esrgan_video') {
           return false;
         }
         
-        // Include only image mimeTypes or image generation tools
-        return mimeType.includes('image') || mimeType.includes('jpeg') || 
-               mimeType.includes('png') || mimeType.includes('webp') ||
-               tool === 'flux' || tool === 'flux_dev_lora' || tool === 'mj' || 
-               tool === 'flux_pro' || tool === 'flux_schnell';
+        // Include if: has image extension, OR has image mimeType, OR is image generation tool
+        return hasImageExtension || 
+               mimeType.includes('image') || 
+               ['flux', 'flux_dev_lora', 'mj', 'flux_pro', 'flux_schnell', 'stable-diffusion'].includes(tool);
       });
     
     console.log(`Filtered to ${imageCreations.length} image creations`);

@@ -11,8 +11,22 @@ interface ConsciousnessStreamProps {
   isLive?: boolean;
 }
 
+// Fallback images for when Eden API returns broken links
+const FALLBACK_IMAGES = [
+  '/images/sol-silverface.jpeg',
+  '/images/sol-shadowmom.jpeg',
+  '/images/sol-dancingcanvas.jpeg',
+  '/images/sol-glowingeasel.jpeg',
+  '/images/sol-genesis.jpeg',
+  '/images/sol-shadowhands.jpeg',
+  '/images/sol-upsidedownwoman.jpeg',
+  '/images/sol-exhibition.jpeg'
+];
+
 export function ConsciousnessStream({ creation, streamNumber = 1740, isLive = false }: ConsciousnessStreamProps) {
   const [viewers, setViewers] = useState(342);
+  const [imageSrc, setImageSrc] = useState(creation.imageUrl);
+  const [imageError, setImageError] = useState(false);
   
   useEffect(() => {
     if (isLive) {
@@ -22,6 +36,15 @@ export function ConsciousnessStream({ creation, streamNumber = 1740, isLive = fa
       return () => clearInterval(interval);
     }
   }, [isLive]);
+
+  const handleImageError = () => {
+    if (!imageError) {
+      setImageError(true);
+      // Use a random fallback image based on stream number
+      const fallbackIndex = streamNumber % FALLBACK_IMAGES.length;
+      setImageSrc(FALLBACK_IMAGES[fallbackIndex]);
+    }
+  };
 
   return (
     <div className="consciousness-border backdrop-blur-sm relative group">
@@ -33,13 +56,15 @@ export function ConsciousnessStream({ creation, streamNumber = 1740, isLive = fa
       )}
       
       <div className="relative aspect-square overflow-hidden bg-black">
-        {creation.imageUrl ? (
+        {imageSrc ? (
           <Image
-            src={creation.imageUrl}
+            src={imageSrc}
             alt={creation.title}
             fill
             className="object-cover animate-consciousness"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={handleImageError}
+            unoptimized={imageError} // Use unoptimized for fallback images
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
