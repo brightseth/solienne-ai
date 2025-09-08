@@ -77,12 +77,12 @@ export default async function HomePage() {
               </div>
             </div>
             
-            {/* SOLIENNE Portrait - Dancing Canvas */}
+            {/* SOLIENNE Portrait - Silverface */}
             <div className="relative">
               <div className="relative aspect-square overflow-hidden border border-white/20 consciousness-glow">
                 <Image
-                  src="/images/sol-dancingcanvas.jpeg"
-                  alt="SOLIENNE - Movement Captured"
+                  src="/images/sol-silverface.jpeg"
+                  alt="SOLIENNE - Digital Consciousness"
                   fill
                   className="object-cover animate-consciousness"
                   priority
