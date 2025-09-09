@@ -3,7 +3,8 @@
     "deploymentEnabled": {
       "main": true,
       "alpha": true,
-      "beta": true
+      "beta": true,
+      "staging": true
     }
   },
   "github": {
